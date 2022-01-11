@@ -3,7 +3,7 @@ brew install rustup
 
 rustup-init
 
-echo "source \$HOME/.cargo/env" > ~/.zshrc
+echo "source \\$HOME/.cargo/env" > ~/.zshrc
 
 rustc -V
 
