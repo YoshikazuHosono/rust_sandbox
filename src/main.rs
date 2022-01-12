@@ -37,7 +37,7 @@ enum Skill {
 // mainメソッドはResultを返却できる
 // fn main() {
 fn main() -> Result<(), String> {
-        println!("Hello, world!");
+    println!("Hello, world!");
 
     // comment
 
@@ -137,8 +137,7 @@ fn main() -> Result<(), String> {
     let if_sample = 10;
     if if_sample == 0 {
         println!("if_sample is 0");
-    } else if if_sample == 2 {
-    } else {
+    } else if if_sample == 2 {} else {
         println!("if_sample is number");
     }
 
@@ -243,34 +242,40 @@ fn main() -> Result<(), String> {
     // let like_null = MyBox { item: None }; できない
 
     // Option None | Some
-    let option_box = MyOptionBox::<u8> {item : None};
+    let option_box = MyOptionBox::<u8> { item: None };
     if option_box.item.is_none() {
         println!("option_box is None");
     }
-    let option_box = MyOptionBox {item :Some(8u8)};
+    let option_box = MyOptionBox { item: Some(8u8) };
     if option_box.item.is_some() {
         println!("option_box is Some");
     }
     match option_box.item {
         None => println!("match option_box is None"),
-        Some(v) => println!("match option_box is Some {}" , v),
+        Some(v) => println!("match option_box is Some {}", v),
     }
 
     // Result
     match give_me_0(0) {
-        Ok(v) => println!("{}",v),
-        Err(v) => println!("{}",v),
+        Ok(v) => println!("{}", v),
+        Err(v) => println!("{}", v),
     }
     match give_me_0(1) {
-        Ok(v) => println!("{}",v),
-        Err(v) => println!("{}",v),
+        Ok(v) => println!("{}", v),
+        Err(v) => println!("{}", v),
     }
     let rslt = give_me_0(0)?;
-    println!("Result use ? {}",rslt);
+    println!("Result use ? {}", rslt);
     // let rslt = give_me_0(1)?; // ここでreturnしちゃう
     // println!("Result use ? {}",rslt); 
 
-    println!("end");
+    // Vector
+    let mut i32_vector = Vec::new();
+    i32_vector.push(12);
+    i32_vector.push(9);
+    println!("i32_vector : {:?}", i32_vector);
+    let string_vector = vec![String::from("1"), String::from("2")];
+    println!("string_vector : {:?}", string_vector);
 
     // mainメソッドはResultを返却できる
     let code = 0;
@@ -305,7 +310,7 @@ fn rslt_str_func_2() -> &'static str {
     return "rslt string";
 }
 
-fn give_me_0(x:u8) -> Result<String,String> {
+fn give_me_0(x: u8) -> Result<String, String> {
     if x == 0 {
         Ok(String::from("it is 0"))
     } else {
