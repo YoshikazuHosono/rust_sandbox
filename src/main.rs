@@ -16,6 +16,10 @@ struct Location(i32, i32);
 // 何もない構造体作れるってよ。意味わからん。
 struct Marker;
 
+struct Foo {
+    x: i32,
+}
+
 // ジェネリクス
 struct MyBox<A> {
     item: A,
@@ -277,6 +281,17 @@ fn main() -> Result<(), String> {
     let string_vector = vec![String::from("1"), String::from("2")];
     println!("string_vector : {:?}", string_vector);
 
+    // 所有権
+    let boo = Foo { x: 7 }; // boo は Foo { x: 7 } の所有者
+    println!("boo.x is {}", boo.x);
+    print_foo(boo);        // 1. 所有者を関数の実引数として渡すと、所有権がprint_fooの仮引数fに移動する
+    // println!("boo.x is {}", boo.x); // 2. print_fooスコープの終了時にprint_fooの仮引数fはdropされるため、Foo { x: 7 }の所有権が消滅。このコードは実行できない。
+
+    let foo = Foo { x: 5 }; // foo は Foo { x: 5 } の所有者
+    println!("foo.x is {}", foo.x);
+    print_foo_2(&foo); // &を使用し、所有権を移動ではなく借用させる
+    println!("foo.x is {}", foo.x); // 所有権はfooのままなので、このコードは実行できる。
+
     // mainメソッドはResultを返却できる
     let code = 0;
     if code == 0 {
@@ -284,6 +299,10 @@ fn main() -> Result<(), String> {
     } else {
         Err(String::from("main method err"))
     }
+
+    // スコープの終了時、リソースのデストラクトと解放が実行される。 -> dropされる
+    // 1. fooがdropされる
+    // 2. foo.xがdropされる
 }
 
 // 関数
@@ -316,4 +335,12 @@ fn give_me_0(x: u8) -> Result<String, String> {
     } else {
         Err(String::from("it is not 0"))
     }
+}
+
+fn print_foo(f: Foo) {
+    println!("Foo x is {}", f.x);
+}
+
+fn print_foo_2(f: &Foo) {
+    println!("Foo x is {}", f.x);
 }
