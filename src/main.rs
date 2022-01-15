@@ -1,5 +1,7 @@
 #![allow(dead_code)] // 使ってない変数とかの警告消す
 
+use std::str::Chars;
+
 // 定数 明示的な型の指定が必要
 const PI: f32 = 3.14159;
 
@@ -306,6 +308,41 @@ fn main() -> Result<(), String> {
     *f2 = Foo { x: 3 }; // 貫通弾
     println!("f2.x={}", f2.x);
     println!("f1.x={}", f1.x);
+
+    // text
+    let str1: &'static str = "static string";
+    let str2: &str = "string point";
+    let mut str3 = "mutable string point";
+    str3 = "edit string";
+    println!("str1 : {}", str1);
+    println!("str2 : {}", str2);
+    println!("str3 : {}", str3);
+
+    let multi_string = "
+        ららら a
+        ルルル a\
+        ロロろ a
+    ";
+    println!("multi_string : {}", multi_string);
+
+    // r##### の#の数は変えられる。最後と数を揃える。これでテキスト内に"#って文字列が書けるね。
+    let multi_string = r#####"
+        <div class="advice">
+            生文字列は様々な場面で役に立ちます。"#
+        </div>
+        "#####;
+    println!("multi_string : {}", multi_string);
+
+    let include_string = include_str!("test.txt");
+    println!("include_string :\n{}", include_string);
+
+    let s = "12345";
+    println!("s.len :{}", s.len());
+    let s = "12345あ";
+    println!("s.len :{}", s.len());
+    let s = "12345あ".chars().collect::<Vec<char>>();
+    println!("s.len :{}", s.len());
+    println!("{}", s[5] as u32);
 
     // mainメソッドはResultを返却できる
     let code = 0;
