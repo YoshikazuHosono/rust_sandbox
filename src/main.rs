@@ -292,6 +292,21 @@ fn main() -> Result<(), String> {
     print_foo_2(&foo); // &を使用し、所有権を移動ではなく借用させる
     println!("foo.x is {}", foo.x); // 所有権はfooのままなので、このコードは実行できる。
 
+    // 可変な借用
+    let mut f1 = Foo { x: 1 };
+    let f2 = &mut f1;
+    f2.x = 2;
+    println!("f2.x={}", f2.x);
+    println!("f1.x={}", f1.x);
+
+    // 可変な借用 貫通弾
+    let mut f1 = Foo { x: 1 };
+    let f2 = &mut f1;
+    f2.x = 2;
+    *f2 = Foo { x: 3 }; // 貫通弾
+    println!("f2.x={}", f2.x);
+    println!("f1.x={}", f1.x);
+
     // mainメソッドはResultを返却できる
     let code = 0;
     if code == 0 {
