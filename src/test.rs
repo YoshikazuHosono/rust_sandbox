@@ -27,12 +27,12 @@ fn before() {
             if a[y + 1][x] != None {
                 if a[y + 1][x] == a[y][x] {
                     a[y][x] = Some(a[y][x].unwrap() * 2);
-					a[y + 1][x] = None;
+                    a[y + 1][x] = None;
                 }
-				if a[y][x] == None {
-					a[y][x] = a[y + 1][x];
-					a[y + 1][x] = None;
-				}
+                if a[y][x] == None {
+                    a[y][x] = a[y + 1][x];
+                    a[y + 1][x] = None;
+                }
             }
         }
     }
@@ -50,24 +50,24 @@ fn before() {
 // 意味わからん
 // とりあえず引数とってぶっ壊さないようにするか
 
-fn after(arg:&Vec<Vec<Option<u16>>>) -> Vec<Vec<Option<u16>>> {
+fn after(arg: &Vec<Vec<Option<u16>>>) -> Vec<Vec<Option<u16>>> {
     let mut a = arg.clone();
 
     for x in 0..3 {
         for y in 0..3 {
-			if a[y + 1][x] == None {
-				break;
-			}
-			if a[y + 1][x] == a[y][x] {
-				a[y][x] = Some(a[y][x].unwrap() * 2);
-				a[y + 1][x] = None;
-			}
-			if a[y][x] == None {
-				a[y][x] = a[y + 1][x];
-				a[y + 1][x] = None;
-			}
+            if a[y + 1][x] == None {
+                break;
+            }
+            if a[y + 1][x] == a[y][x] {
+                a[y][x] = Some(a[y][x].unwrap() * 2);
+                a[y + 1][x] = None;
+            }
+            if a[y][x] == None {
+                a[y][x] = a[y + 1][x];
+                a[y + 1][x] = None;
+            }
         }
     }
 
-	a.to_vec()
+    a.to_vec()
 }
