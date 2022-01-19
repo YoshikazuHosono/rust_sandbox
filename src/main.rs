@@ -143,7 +143,8 @@ fn main() -> Result<(), String> {
     let if_sample = 10;
     if if_sample == 0 {
         println!("if_sample is 0");
-    } else if if_sample == 2 {} else {
+    } else if if_sample == 2 {
+    } else {
         println!("if_sample is number");
     }
 
@@ -273,7 +274,7 @@ fn main() -> Result<(), String> {
     let rslt = give_me_0(0)?;
     println!("Result use ? {}", rslt);
     // let rslt = give_me_0(1)?; // ここでreturnしちゃう
-    // println!("Result use ? {}",rslt); 
+    // println!("Result use ? {}",rslt);
 
     // Vector
     let mut i32_vector = Vec::new();
@@ -286,8 +287,8 @@ fn main() -> Result<(), String> {
     // 所有権
     let boo = Foo { x: 7 }; // boo は Foo { x: 7 } の所有者
     println!("boo.x is {}", boo.x);
-    print_foo(boo);        // 1. 所有者を関数の実引数として渡すと、所有権がprint_fooの仮引数fに移動する
-    // println!("boo.x is {}", boo.x); // 2. print_fooスコープの終了時にprint_fooの仮引数fはdropされるため、Foo { x: 7 }の所有権が消滅。このコードは実行できない。
+    print_foo(boo); // 1. 所有者を関数の実引数として渡すと、所有権がprint_fooの仮引数fに移動する
+                    // println!("boo.x is {}", boo.x); // 2. print_fooスコープの終了時にprint_fooの仮引数fはdropされるため、Foo { x: 7 }の所有権が消滅。このコードは実行できない。
 
     let foo = Foo { x: 5 }; // foo は Foo { x: 5 } の所有者
     println!("foo.x is {}", foo.x);
